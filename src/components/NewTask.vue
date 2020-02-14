@@ -25,6 +25,9 @@ export default {
 <style>
   .new-task{
     margin: 35px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .form-element{
@@ -36,7 +39,7 @@ export default {
   }
 
   input.form-element{
-    width: 500px;
+    width: 30%;
     background: #FFF2;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
