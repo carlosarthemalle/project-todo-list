@@ -2,7 +2,9 @@
 	<div id="app">
 		<h1>Tarefas</h1>
 		<new-task @taskAdded="addTask"/> 
-		<TaskGrid :tasks="tasks"/>
+		<TaskGrid @taskDeleted="deleteTask" 
+							@taskStateChanged="toggleStateChanged" 
+							:tasks="tasks"/>
 	</div>
 </template>
 
@@ -23,13 +25,19 @@ export default {
 	methods:{
 		addTask(task){
 			const sameName = t => t.name === task.name;
-			const reallyNew = this.tasks.filter(sameName).length == 0 || sameName !== null;
+			const reallyNew = this.tasks.filter(sameName).length == 0 && task.name !== "";
 			if(reallyNew){
 				this.tasks.push({
 					name: task.name,
 					pending: task.pending || true
 				})
 			}
+		},
+		deleteTask(i){
+			this.tasks.splice(i, 1);
+		},
+		toggleStateChanged(i){
+			this.tasks[i].pending = !this.tasks[i].pending;
 		}
 	}
 }
